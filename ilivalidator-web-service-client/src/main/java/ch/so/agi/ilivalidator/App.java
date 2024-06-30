@@ -199,8 +199,8 @@ public class App implements EntryPoint {
                     if (!response.ok) {
                         resetInputElements();
                         
-                        Promise<String> foo  = response.text();
-                        foo.then(r -> { 
+                        Promise<String> promise  = response.text();
+                        promise.then(r -> { 
                             //logToProtocol(r);
                             console.log(r);
                             return null;
