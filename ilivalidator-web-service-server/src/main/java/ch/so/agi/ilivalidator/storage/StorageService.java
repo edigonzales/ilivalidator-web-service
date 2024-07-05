@@ -9,4 +9,6 @@ public interface StorageService {
     void init();
 
     Path[] store(MultipartFile[] files, String jobId) throws IOException;
+
+    Path load(String filePath);
 }

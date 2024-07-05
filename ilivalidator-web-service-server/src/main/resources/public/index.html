@@ -27,12 +27,7 @@
     
     <div class="container d-flex justify-content-center align-items-center">
         <form id="uploadForm" class="w-50" enctype="multipart/form-data">
-        <!-- 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
+            <!-- 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1">
@@ -42,11 +37,6 @@
                 <label for="profileSelect" class="form-label">Prüfprofil wählen</label>
                 <select id="profileSelect" class="form-select" aria-label="Small select example">
                     <option selected>Standard (keine zusätzlichen Tests)</option>
-                <!-- 
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                 -->
                 </select>
              </div>
              
@@ -54,7 +44,11 @@
               <label for="fileInput" class="form-label">INTERLIS-Transferdateien</label>
               <input id="fileInput" name="files" class="form-control" type="file" multiple accept=".xtf,.xml,.itf">
             </div>
-
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">E-Mail-Adresse</label>
+                <input type="email" class="form-control" id="email" placeholder="Optional">
+            </div>
 <!-- 
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -62,6 +56,8 @@
             </div>
  -->
             <button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+            
+            <div id="protocol-container" class="mb-3"></div>
         </form>
     </div>
 

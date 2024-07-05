@@ -67,7 +67,13 @@ public class LocalFileStorageService implements StorageService {
             }
         }
         return paths.toArray(new Path[0]);
-
     }
+    
+    @Override
+    public Path load(String filePath) {
+        Path path = workDirectoryPath.resolve(filePath);
+        return path;
+    }
+
 
 }
