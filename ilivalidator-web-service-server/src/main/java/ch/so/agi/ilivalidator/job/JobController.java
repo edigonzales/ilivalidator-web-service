@@ -68,7 +68,8 @@ public class JobController {
     public ResponseEntity<?> uploadFiles(
             @RequestPart(name="jobId", required=true) String jobId,
             @RequestPart(name="files", required=true) MultipartFile[] files, 
-            @RequestPart(name="profile", required=false) String profile) {
+            @RequestPart(name="profile", required=false) String profile,
+            @RequestPart(name="email", required=false) String email) {
         
         String qualifiedProfile = profiles.get(profile);
         String profileString = qualifiedProfile==null?"":qualifiedProfile;
@@ -76,6 +77,9 @@ public class JobController {
         log.debug("<{}> Selected profile: {}", jobId, profile);
         log.debug("<{}> Number of uploaded files: {}", jobId, files.length);
 
+        String emailString = email==null?"":email;
+        log.debug("<{}> Mail will be sent to {}", jobId, emailString);
+        
         Path[] uploadedFiles;
         try {
             uploadedFiles = storageService.store(files, jobId);
@@ -83,7 +87,7 @@ public class JobController {
             throw new RuntimeException("Could not store files.");
         }
         
-        jobScheduler.enqueue(UUID.fromString(jobId), () -> jobService.validate(JobContext.Null, uploadedFiles, profileString));
+        jobScheduler.enqueue(UUID.fromString(jobId), () -> jobService.validate(JobContext.Null, uploadedFiles, profileString, emailString));
         
         return ResponseEntity
                 .accepted()

@@ -62,6 +62,7 @@ public class App implements EntryPoint {
     private HTMLFormElement form;
     private HTMLSelectElement select;
     private HTMLInputElement input;
+    private HTMLInputElement email;
     private HTMLButtonElement button;
     private HTMLDivElement protocolContainer;
     
@@ -72,8 +73,6 @@ public class App implements EntryPoint {
     private Map<String,String> profiles;
 
 	public void onModuleLoad() {
-        console.log("Hallo Stefan");
-        
         URL url = new URL(DomGlobal.location.href);
         host = url.host;
         protocol = url.protocol;
@@ -98,20 +97,13 @@ public class App implements EntryPoint {
                     profiles.put(key, value);
                 }                
             });
-            
-            init();
-            
+            init(); 
             return null;
         }).catch_(error -> {
             console.log(error);
             DomGlobal.window.alert(error.toString());
             return null;
         });
-
-        
-        
-//        init();
-        //body().add(div().textContent("Hallo Welt"));
 	}
 	
 	private void init() {
@@ -140,6 +132,8 @@ public class App implements EntryPoint {
         });
 
         input = (HTMLInputElement) getDocument().getElementById("fileInput");
+        
+        email = (HTMLInputElement) getDocument().getElementById("email");
         	    
 	    button = (HTMLButtonElement) getDocument().getElementById("submitButton");
         
@@ -166,6 +160,7 @@ public class App implements EntryPoint {
                 console.log(jobId);
                 
                 formData.append("profile", select.selectedOptions.getAt(0).value);
+                formData.append("email", email.value);
                 
                 List<String> fileNames = new ArrayList<>();
                 int filesSize = 0;
@@ -178,7 +173,6 @@ public class App implements EntryPoint {
                     filesSize += file.size;
                     int filesSizeMb = filesSize / 1024 / 1024;
                     if (filesSizeMb > MAX_FILES_SIZE_MB) {
-                        //logToProtocol(messages.errorTooLargeFile(String.valueOf(MAX_FILES_SIZE_MB)));
                         Window.alert("Datei(en) zu gross. Maximum: " + String.valueOf(MAX_FILES_SIZE_MB) + "MB");
                         resetInputElements();
                         return;

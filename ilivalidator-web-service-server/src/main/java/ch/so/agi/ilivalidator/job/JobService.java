@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.interlis2.validator.Validator;
 import org.jobrunr.jobs.annotations.Job;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import ch.ehi.basics.settings.Settings;
+import ch.so.agi.ilivalidator.mail.MailService;
 
 @Service
 public class JobService {
@@ -22,12 +24,15 @@ public class JobService {
     
     private String preferredIliRepo;    
     
-    public JobService(@Value("${app.preferredIliRepo}") String preferredIliRepo) {
+    private MailService mailService;
+    
+    public JobService(@Value("${app.preferredIliRepo}") String preferredIliRepo, MailService mailService) {
         this.preferredIliRepo = preferredIliRepo;
+        this.mailService = mailService;
     }
     
     @Job(name = "Ilivalidator", retries=0)
-    public synchronized boolean validate(JobContext jobContext, Path[] transferFiles, String profile) {
+    public synchronized boolean validate(JobContext jobContext, Path[] transferFiles, String profile, String email) {
         String jobId = jobContext.getJobId().toString();
         
         List<String> transferFileNames = new ArrayList<>();
@@ -59,6 +64,23 @@ public class JobService {
         boolean valid = Validator.runValidation(transferFileNames.toArray(new String[0]), settings);
         log.info("Validation end");
 
+        if (!email.isEmpty()) {             
+            String fileNames = transferFileNames.stream()
+                    .map(f -> {
+                        return Paths.get(f).toFile().getName();
+                    })
+                    .collect(Collectors.joining(", "));
+            
+            String mailSubject = (valid?"DONE":"FAILED") + " / " + jobId + " / "+ fileNames;
+            String mailBody = "Job-ID: %s".formatted(jobId);
+ 
+            try {
+                mailService.send(email, mailSubject, mailBody, logFileName);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("<{}> Error while sending email: {}", jobId, e.getMessage());
+            }
+        }
         
         return valid;
     }
