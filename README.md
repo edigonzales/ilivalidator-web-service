@@ -1,5 +1,8 @@
 # ilivalidator-web-service
 
+TODO:
+- git-commit-id-plugin -> inkl. Link 
+
 ## Beschreibung
 
 ## Anleitungen
@@ -15,7 +18,26 @@ java -jar ilivalidator-web-service-server/target/ilivalidator-web-service.jar --
 ```
 Anstelle der spring.xxx.xxx Properties kann man auch die entsprechenden Env Vars setzen (siehe application.properties).
 
+### Optionen (Umgebungsvariablen)
 
+### Clean up
+
+### Additional models
+
+### Ilivalidator custom functions
+
+### Clustering
+
+## Externe Abhängigkeiten
+
+## Interne Struktur
+
+TODO:
+- spring boot / maven multimodule 
+- GWT
+- Jobrunr
+- rest api
+- Max file size: Stand heute an zwei Orten...
 
 ## Entwicklung
 
