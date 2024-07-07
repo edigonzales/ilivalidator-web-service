@@ -44,6 +44,22 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>testcontainers</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <scope>test</scope>
+</dependency>
+
     <!--
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -72,6 +88,13 @@
     <artifactId>ilivalidator</artifactId>
     <version>1.14.3-SNAPSHOT</version>
 </dependency>
+    
+    
+<dependency>
+    <groupId>org.awaitility</groupId>
+    <artifactId>awaitility</artifactId>
+    <scope>test</scope>
+</dependency> 
     
   </dependencies>
 
@@ -156,14 +179,26 @@
       <!-- XXX: We want to exclude ilivalidator-web-service-client from 'env-dev' profile, Maven forces us to make a 'env-prod' profile -->
       <id>env-prod</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <!--<activeByDefault>true</activeByDefault>-->
       </activation>
       <build>
         <plugins>
+                <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <groups>docker</groups>
+                    <excludedGroups>docker</excludedGroups>
+                </configuration>
+            </plugin>
+                -->
+        
           <!-- Das ist "maven build smell", weil das Entpacken vor dem Packen kommt. Eclipse und Maven reklamiert ggf. auch. -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
             <executions>
               <execution>
                 <id>unpack-gwt-war</id>
@@ -188,6 +223,31 @@
               </execution>
             </executions>
           </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>post-package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker</executable>
+                            <arguments>
+                                <argument>build</argument>
+                                <argument>-t</argument>
+                                <argument>sogis:ilivalidator-web-service</argument>
+                                <argument>-f</argument>
+                                <argument>Dockerfile.ubi-layered</argument>
+                                <argument>.</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
       </build>
 

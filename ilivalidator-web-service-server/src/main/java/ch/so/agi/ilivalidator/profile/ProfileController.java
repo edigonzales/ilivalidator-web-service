@@ -28,7 +28,7 @@ public class ProfileController {
     
     @GetMapping("/api/profiles")
     public ResponseEntity<?> getProfiles() throws IOException {
-        // TreeMap: sortiert by key
+        // TreeMap: Sortiert die Map by key
         TreeMap<String, String> treeMap = new TreeMap<>(profileProperties.getProfiles());
 
         HashMap<String, Map<String,String>> profiles = new HashMap<>();
