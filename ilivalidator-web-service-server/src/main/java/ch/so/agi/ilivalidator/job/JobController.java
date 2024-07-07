@@ -17,6 +17,7 @@ import org.jobrunr.storage.StorageProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ch.so.agi.ilivalidator.profile.ProfileProperties;
 import ch.so.agi.ilivalidator.storage.StorageService;
 
+@ConditionalOnProperty(
+        value="app.restApiEnabled", 
+        havingValue = "true", 
+        matchIfMissing = false)
 @RestController
 public class JobController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ch.so.agi.ilivalidator.storage.StorageService;
 
+@ConditionalOnProperty(
+        value="app.restApiEnabled", 
+        havingValue = "true", 
+        matchIfMissing = false)
 @RestController
 public class LogController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -34,12 +39,10 @@ public class LogController {
         
         try {
             Path logFile = storageService.load(key + "/" + filename);
-            
             return ResponseEntity.ok().header("Content-Type", "charset=utf-8")
                     .contentLength(Files.size(logFile))
                     .contentType(mediaType)
                     .body(Files.readString(logFile));
-
         } catch (IOException e) {
             return ResponseEntity.notFound().build();
         }

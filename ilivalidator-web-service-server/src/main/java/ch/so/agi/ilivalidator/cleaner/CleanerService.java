@@ -10,13 +10,11 @@ import org.springframework.util.FileSystemUtils;
 import ch.so.agi.ilivalidator.storage.LocalFileStorageService;
 import ch.so.agi.ilivalidator.storage.StorageService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +45,7 @@ public class CleanerService {
     @Async("cleanerAsyncTaskExecutor")
     @Scheduled(cron="0 */30 * * * *")
     //@Scheduled(fixedRate = 1 * 30 * 1000) /* Runs every 30 seconds */
-    //@Scheduled(fixedRate = 1 * 10 * 1000) /* Runs every 30 seconds */
+    //@Scheduled(fixedRate = 1 * 10 * 1000) /* Runs every 10 seconds */
     public void cleanUp() throws IOException {    
         long deleteFileAge = 60*60*24; // = 1 Tag
         log.info("Deleting files from previous delivery runs older than {} [s]...", deleteFileAge);
