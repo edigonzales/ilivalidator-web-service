@@ -38,6 +38,9 @@ TODO:
 - Jobrunr
 - rest api
 - Max file size: Stand heute an zwei Orten...
+- Test und Dockertests
+- Wie wird metaConfig etc. getestet? (Weiss ich noch nicht zu 100%: Idee neu wäre wohl mit kleinem lokalen Dockerimage mit ilidata.xml etc. Dann müsste preferred Ili Repo im Test noch anders gestetzt werden.)
+
 
 ## Entwicklung
 
