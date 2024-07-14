@@ -14,9 +14,8 @@ TODO:
 Die Anwendung kann wie folgt gestartet werden:
 
 ```
-java -jar ilivalidator-web-service-server/target/ilivalidator-web-service.jar --spring.mail.username=stefan.ziegler.de@gmail.com --spring.mail.password=my_secret_key
+java -jar ilivalidator-web-service-server/target/ilivalidator-web-service.jar 
 ```
-Anstelle der spring.xxx.xxx Properties kann man auch die entsprechenden Env Vars setzen (siehe application.properties).
 
 ### Optionen (Umgebungsvariablen)
 
@@ -48,9 +47,8 @@ TODO:
 
 First Terminal:
 ```
-./mvnw spring-boot:run -pl *-server -am -Penv-dev -Dspring-boot.run.arguments="'spring.mail.username=foo@bar.ch' 'spring.mail.password=my_secret_key'"
+./mvnw spring-boot:run -pl *-server -am -Penv-dev 
 ```
-Anstelle der spring.xxx.xxx Properties kann man (lokal zum Entwickeln) auch die entsprechenden Env Vars setzen (siehe application.properties).
 
 Second Terminal:
 ```
@@ -85,4 +83,14 @@ Maven kennt Integrationtests in der Verify-Phase (nach Package). Wir verwenden j
 
 ```
 ./mvnw test -Dgroups="docker"
+```
+
+### Lokales Repository
+
+Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein, wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modell liegen im _*-server/src/test/data/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt. Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit TestContainers hochgefahren.
+
+TODO: Geometrie, Units etc.
+
+```
+java -jar ilimanager-0.9.1.jar --createIliModels --repos . --out ilimodels.xml
 ```

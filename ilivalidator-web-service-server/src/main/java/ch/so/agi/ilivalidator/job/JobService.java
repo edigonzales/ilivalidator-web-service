@@ -16,23 +16,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import ch.ehi.basics.settings.Settings;
-import ch.so.agi.ilivalidator.mail.MailService;
 
 @Service
 public class JobService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     
     private String preferredIliRepo;    
-    
-    private MailService mailService;
-    
-    public JobService(@Value("${app.preferredIliRepo}") String preferredIliRepo, MailService mailService) {
+        
+    public JobService(@Value("${app.preferredIliRepo}") String preferredIliRepo) {
         this.preferredIliRepo = preferredIliRepo;
-        this.mailService = mailService;
     }
     
     @Job(name = "Ilivalidator", retries=0)
-    public synchronized boolean validate(JobContext jobContext, Path[] transferFiles, String profile, String email) {
+    public synchronized boolean validate(JobContext jobContext, Path[] transferFiles, String profile) {
         String jobId = jobContext.getJobId().toString();
         
         List<String> transferFileNames = new ArrayList<>();
@@ -63,24 +59,6 @@ public class JobService {
         log.info("Validation start");
         boolean valid = Validator.runValidation(transferFileNames.toArray(new String[0]), settings);
         log.info("Validation end");
-
-        if (!email.isEmpty()) {             
-            String fileNames = transferFileNames.stream()
-                    .map(f -> {
-                        return Paths.get(f).toFile().getName();
-                    })
-                    .collect(Collectors.joining(", "));
-            
-            String mailSubject = (valid?"DONE":"FAILED") + " / " + jobId + " / "+ fileNames;
-            String mailBody = "Job-ID: %s".formatted(jobId);
- 
-            try {
-                mailService.send(email, mailSubject, mailBody, logFileName);
-            } catch (Exception e) {
-                e.printStackTrace();
-                log.error("<{}> Error while sending email: {}", jobId, e.getMessage());
-            }
-        }
         
         return valid;
     }

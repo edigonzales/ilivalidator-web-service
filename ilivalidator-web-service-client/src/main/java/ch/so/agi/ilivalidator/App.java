@@ -40,11 +40,9 @@ import elemental2.dom.URL;
 import elemental2.dom.URLSearchParams;
 import elemental2.dom.XMLHttpRequest;
 import elemental2.promise.Promise;
-import jsinterop.base.Any;
 import jsinterop.base.Js;
 import jsinterop.base.JsForEachCallbackFn;
 import jsinterop.base.JsPropertyMap;
-
 
 public class App implements EntryPoint {
 
@@ -62,7 +60,6 @@ public class App implements EntryPoint {
     private HTMLFormElement form;
     private HTMLSelectElement select;
     private HTMLInputElement input;
-    private HTMLInputElement email;
     private HTMLButtonElement button;
     private HTMLDivElement protocolContainer;
     
@@ -132,9 +129,7 @@ public class App implements EntryPoint {
         });
 
         input = (HTMLInputElement) getDocument().getElementById("fileInput");
-        
-        email = (HTMLInputElement) getDocument().getElementById("email");
-        	    
+                	    
 	    button = (HTMLButtonElement) getDocument().getElementById("submitButton");
         
         form = (HTMLFormElement) getDocument().getElementById("uploadForm");
@@ -160,7 +155,6 @@ public class App implements EntryPoint {
                 console.log(jobId);
                 
                 formData.append("profile", select.selectedOptions.getAt(0).value);
-                formData.append("email", email.value);
                 
                 List<String> fileNames = new ArrayList<>();
                 int filesSize = 0;
