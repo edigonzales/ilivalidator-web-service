@@ -229,7 +229,7 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <id>post-package</id>
+                        <id>docker-image-app</id>
                         <phase>package</phase>
                         <goals>
                             <goal>exec</goal>
@@ -246,6 +246,25 @@
                             </arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>docker-image-models</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>docker</executable>
+                            <arguments>
+                                <argument>build</argument>
+                                <argument>-t</argument>
+                                <argument>sogis:interlis-repository-test</argument>
+                                <argument>-f</argument>
+                                <argument>./src/test/docker/Dockerfile</argument>
+                                <argument>./src/test/docker</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>

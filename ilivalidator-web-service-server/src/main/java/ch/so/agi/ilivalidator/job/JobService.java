@@ -1,11 +1,9 @@
 package ch.so.agi.ilivalidator.job;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.interlis2.validator.Validator;
 import org.jobrunr.jobs.annotations.Job;
@@ -21,10 +19,10 @@ import ch.ehi.basics.settings.Settings;
 public class JobService {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     
-    private String preferredIliRepo;    
+    private String ilidirs;    
         
-    public JobService(@Value("${app.preferredIliRepo}") String preferredIliRepo) {
-        this.preferredIliRepo = preferredIliRepo;
+    public JobService(@Value("${app.ilidirs}") String ilidirs) {
+        this.ilidirs = ilidirs;
     }
     
     @Job(name = "Ilivalidator", retries=0)
@@ -44,13 +42,11 @@ public class JobService {
         settings.setValue(Validator.SETTING_LOGFILE, logFileName);
         settings.setValue(Validator.SETTING_XTFLOG, logFileName + ".xtf");
         settings.setValue(Validator.SETTING_CSVLOG, logFileName + ".csv");
-
-        String settingIlidirs = Validator.SETTING_DEFAULT_ILIDIRS;
-        if (preferredIliRepo != null) {
-            settingIlidirs = preferredIliRepo + ";" + settingIlidirs;   
-        }
-        settings.setValue(Validator.SETTING_ILIDIRS, settingIlidirs);
-        log.debug("<{}> Setting ilidirs: {}", jobId, settingIlidirs);
+        
+        if (ilidirs != null) {
+            settings.setValue(Validator.SETTING_ILIDIRS, ilidirs);
+            log.debug("<{}> Setting ilidirs: {}", jobId, ilidirs);
+        }        
 
         if (!profile.isEmpty()) {
             settings.setValue(Validator.SETTING_META_CONFIGFILE, "ilidata:" + profile);

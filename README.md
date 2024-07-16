@@ -80,12 +80,25 @@ Maven kennt Integrationtests in der Verify-Phase (nach Package). Wir verwenden j
 ./mvnw test -Dgroups="docker"
 ```
 
+Einzelner Test ausführen:
+
+```
+./mvnw test -Dtest=SpringJobControllerTests#validate_File_Interlis2_Ok -Dsurefire.failIfNoSpecifiedTests=false
+```
+
+
 ### Lokales Repository
 
-Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein, wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modell liegen im _*-server/src/test/data/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt. Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit TestContainers hochgefahren.
+Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein, wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modelle liegen im _*-server/src/test/docker/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt und sie muss im gleichen Ordner wie die Modelle zu liegen kommen (siehe Befehl unten). Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit Testcontainers hochgefahren.
 
 TODO: Geometrie, Units etc.
 
 ```
-java -jar ilimanager-0.9.1.jar --createIliModels --repos . --out ilimodels.xml
+java -jar ilimanager-0.9.1.jar --createIliModels --repos models --out models/ilimodels.xml
+```
+
+Docker image builden:
+
+```
+docker build -t sogis/interlis-repository-test .
 ```
