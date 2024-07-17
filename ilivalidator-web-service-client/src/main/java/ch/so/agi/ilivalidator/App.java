@@ -152,9 +152,10 @@ public class App implements EntryPoint {
 
                 String jobId = uuid();
                 formData.append("jobId", jobId);
-                console.log(jobId);
-                
-                formData.append("profile", select.selectedOptions.getAt(0).value);
+                                
+                if (select.selectedIndex > 0) {
+                    formData.append("profile", select.selectedOptions.getAt(0).value);                    
+                }
                 
                 List<String> fileNames = new ArrayList<>();
                 int filesSize = 0;
