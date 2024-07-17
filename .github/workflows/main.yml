@@ -88,6 +88,6 @@ jobs:
             ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}
             ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}
             ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:latest
-            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}::${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}.${{ env.BUILD_NUMBER }}
+            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}.${{ env.BUILD_NUMBER }}
             ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}
             ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}

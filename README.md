@@ -1,13 +1,32 @@
+[![CI/CD](https://github.com/edigonzales/ilivalidator-web-service/actions/workflows/main.yml/badge.svg)](https://github.com/edigonzales/ilivalidator-web-service/actions/workflows/main.yml)
+
 # ilivalidator-web-service
 
-TODO:
-- git-commit-id-plugin -> inkl. Link: http://localhost:8080/actuator/info
+The ilivalidator web service is a [Spring Boot](https://projects.spring.io/spring-boot/) application and uses [ilivalidator](https://github.com/claeis/ilivalidator) for the INTERLIS transfer file validation.
 
 ## Beschreibung
 
+* checks INTERLIS 1+2 transfer files: see [https://github.com/claeis/ilivalidator](https://github.com/claeis/ilivalidator) for all the INTERLIS validation magic of ilivalidator
+* uses remote config files for validation tailoring
+* user can upload multiple transfer files at once
+* REST-API
+* simple clustering for horizontal scaling
+
 ## Anleitungen
 
+Der Benutzer wählt eine oder mehrere INTERLIS-Transferdateien aus und lädt sie hoch. Im Browser erscheint nach erfolgter Prüfung das Resultat und Links zu den Logdateien. Es stehen verschiedene Prüfprofile zur Verfügung, welche die Validierung zusätzlich konfigurieren (z.B. Warnung statt Error, zusätzliche Constraints, etc.).
+
+Weitere Informationen:
+
+- GUI: [docs/user-manual-de.md](docs/user-manual-de.md)
+- Nutzungsplanung: [docs/user-manual-de-nplso.md](docs/user-manual-de-nplso.md)
+- REST-API: [docs/rest-api-de.md](docs/rest-api-de.md)
+
 ## Komponenten
+
+Die Anwendung besteht aus einer Komponente. Wird ein Datenbankserver für das Speichern der Jobqueue verwendet, gehört das Schema etc. auch als Komponente zur Anwendung. Standardmässig wird eine SQlite-Datenbank verwendet, welche automatisch erstellt wird, falls sie nicht vorhanden ist.
+
+Die Prüfprofile (aka Zusatzkonfiguration) sind nicht Bestandteil der Komponente, sondern sie liegen in eigenen oder fremden ilidata-Repositories.
 
 ## Konfigurieren und Starten
 
@@ -54,6 +73,7 @@ TODO:
 - Registrierung Zusatzfunktionen
 - --spring.profiles.active=docker
 - ./mvnw versions:set -DnewVersion=3.0.1-SNAPSHOT -DprocessAllModules
+- git-commit-id-plugin -> inkl. Link: http://localhost:8080/actuator/info
 
 ## Entwicklung
 
