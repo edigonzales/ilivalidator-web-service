@@ -1,7 +1,7 @@
 # ilivalidator-web-service
 
 TODO:
-- git-commit-id-plugin -> inkl. Link 
+- git-commit-id-plugin -> inkl. Link: http://localhost:8080/actuator/info
 
 ## Beschreibung
 
@@ -39,6 +39,7 @@ TODO:
 - Max file size: Stand heute an zwei Orten...
 - Test und Dockertests
 - Wie wird metaConfig etc. getestet? (Weiss ich noch nicht zu 100%: Idee neu wäre wohl mit kleinem lokalen Dockerimage mit ilidata.xml etc. Dann müsste preferred Ili Repo im Test noch anders gestetzt werden.)
+- Registrierung Zusatzfunktionen
 
 
 ## Entwicklung
@@ -89,7 +90,7 @@ Einzelner Test ausführen:
 
 ### Lokales Repository
 
-Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein, wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modelle liegen im _*-server/src/test/docker/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt und sie muss im gleichen Ordner wie die Modelle zu liegen kommen (siehe Befehl unten). Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit Testcontainers hochgefahren.
+Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit der Tests nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein und Veränderungen in solchen (z.B. replaced Modelle, Änderungen in den ini-Konfigs), wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modelle liegen im _*-server/src/test/docker/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt und sie muss im gleichen Ordner wie die Modelle zu liegen kommen (siehe Befehl unten). Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit Testcontainers hochgefahren.
 
 In Units, Time und CoordSys musste das Metaattribut "precursorVersion" gelöscht werden, weil es im Repo keine geben wird und ili2c solche Modell anschliessend ignoriert.
 
