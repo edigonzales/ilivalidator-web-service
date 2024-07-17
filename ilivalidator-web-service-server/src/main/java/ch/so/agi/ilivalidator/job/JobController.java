@@ -69,12 +69,13 @@ public class JobController {
         this.storageProvider = storageProvider;
     }
 
+    // @RequestPart anstelle von @RequestParam und @RequestBody damit swagger korrekt funktioniert.
     @PostMapping(value="/api/jobs", consumes = {"multipart/form-data"})
     public ResponseEntity<?> uploadFiles(
-            @RequestPart(name="jobId", required=true) String jobId,
             @RequestPart(name="files", required=true) MultipartFile[] files, 
             @RequestPart(name="profile", required=false) String profile) {
         
+        String jobId = UUID.randomUUID().toString();
         String profileString = profile==null?"":profile;
         
         log.debug("<{}> Selected profile: {}", jobId, profile);

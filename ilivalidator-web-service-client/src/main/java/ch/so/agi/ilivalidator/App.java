@@ -149,9 +149,6 @@ public class App implements EntryPoint {
                 button.disabled = true;
 
                 FormData formData = new FormData();
-
-                String jobId = uuid();
-                formData.append("jobId", jobId);
                                 
                 if (select.selectedIndex > 0) {
                     formData.append("profile", select.selectedOptions.getAt(0).value);                    
@@ -359,12 +356,12 @@ public class App implements EntryPoint {
         $wnd.history.pushState(newUrl, "", newUrl);
     }-*/;
     
-    public native static String uuid() /*-{
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
-            function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r
-                        : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-    }-*/;
+//    public native static String uuid() /*-{
+//    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+//            function(c) {
+//                var r = Math.random() * 16 | 0, v = c == 'x' ? r
+//                        : (r & 0x3 | 0x8);
+//                return v.toString(16);
+//            });
+//    }-*/;
 }

@@ -57,7 +57,6 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("jobId", UUID.randomUUID().toString());
         parameters.add("files", new FileSystemResource("src/test/data/ch.so.avt.kunstbauten.xtf"));
 
         HttpHeaders headers = new HttpHeaders();
@@ -99,7 +98,6 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("jobId", UUID.randomUUID().toString());
         parameters.add("files", new FileSystemResource("src/test/data/error_VOLLZUG_SO0300002511_1153_20210329115028.xml"));
 
         HttpHeaders headers = new HttpHeaders();
@@ -146,7 +144,6 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("jobId", UUID.randomUUID().toString());
         parameters.add("files", new FileSystemResource("src/test/data/2457_Messen_vorher.xtf"));
         parameters.add("profile", "ilidata:SO_Nutzungsplanung_20171118_20231101-meta");
         
@@ -204,7 +201,6 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("jobId", UUID.randomUUID().toString());
         parameters.add("files", new FileSystemResource("src/test/data/NGK_SO_Testbeddata.xtf"));
         parameters.add("profile", "ilidata:SO_AFU_Naturgefahren_20240515-web-meta");
         
@@ -254,8 +250,6 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-        parameters.add("jobId", UUID.randomUUID().toString());
-        parameters.add("files", new FileSystemResource("src/test/data/ch.so.avt.kunstbauten.xtf"));
         parameters.add("profile", "ilidata:SO_Nutzungsplanung_20171118_20231101-meta");
         
         HttpHeaders headers = new HttpHeaders();
@@ -297,7 +291,6 @@ public abstract class JobControllerTests {
         assertTrue(logFileContents.contains("Error: line 5: SO_AVT_Kunstbauten_Publikation_20220207.Kunstbauten.Kunstbaute: tid f0cc0e37-9db7-492e-8ad7-9df33585939e: unknown class <SO_AVT_Kunstbauten_Publikation_20220207.Kunstbauten.Kunstbaute>"));
     }
 
-    
     public class MyCallable implements Callable<Boolean> {
 
         private final String operationLocation;
