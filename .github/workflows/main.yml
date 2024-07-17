@@ -39,7 +39,7 @@ jobs:
       - name: Test and build Jar
         run: |
           ./mvnw -Penv-test clean test -DexcludedGroups="docker"
-          ./mvnw -Penv-prod clean package -DexcludedGroups="docker" -DskipTests
+          ./mvnw -Penv-prod clean package -DexcludedGroups="docker"
           ls -la ilivalidator-web-service-server/target
 
       # - name: Set up QEMU for amd64 and arm64
