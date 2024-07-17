@@ -284,6 +284,33 @@
                             </arguments>
                         </configuration>
                     </execution>
+                </executions>
+            </plugin>
+        </plugins>
+      </build>
+
+     <!--
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>ilivalidator-web-service-client</artifactId>
+          <version>${project.version}</version>
+          <type>war</type>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+      -->
+    </profile>
+    
+    <profile>
+        <id>env-test</id>
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
                     <execution>
                         <id>docker-image-models</id>
                         <phase>compile</phase>
@@ -305,21 +332,11 @@
 
                 </executions>
             </plugin>
+
         </plugins>
       </build>
-
-     <!--
-      <dependencies>
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>ilivalidator-web-service-client</artifactId>
-          <version>${project.version}</version>
-          <type>war</type>
-          <scope>runtime</scope>
-        </dependency>
-      </dependencies>
-      -->
     </profile>
+    
     <profile>
       <id>env-dev</id>
       <activation>

@@ -37,10 +37,13 @@ jobs:
           cache: 'maven'
 
       - name: Test and build Jar
+        # run: |
+        #   ./mvnw clean compile
+        #   ./mvnw test -DexcludedGroups="docker"
+        #   ./mvnw -Penv-prod clean package -DexcludedGroups="docker" -DskipTests
+        #   ls -la ilivalidator-web-service-server/target
         run: |
-          ./mvnw clean test -DexcludedGroups="docker"
-          ./mvnw -Penv-prod clean package -DexcludedGroups="docker" -DskipTests
-          ls -la ilivalidator-web-service-server/target
+          ./mvnw -Penv-test clean test -DexcludedGroups="docker"
 
       - name: Login to Docker Container Registry
         uses: docker/login-action@v2
@@ -65,9 +68,9 @@ jobs:
       #     load: true
       #     pull: true 
 
-      # - name: List Docker images
-      #   run: |
-      #     docker images
+      - name: List Docker images
+        run: |
+          docker images
 
       # - name: Test Docker image
       #   run: ./mvnw test -Dgroups="docker"
