@@ -3,7 +3,6 @@
 INTERLIS 2.3;
 
 !! 2020-02-19 CLASS TimeZone defined as not ABSTRACT
-!!@precursorVersion = 2017-04-13
 
 CONTRACTED REFSYSTEM MODEL Time (en) AT "http://www.interlis.ch/models"
   VERSION "2020-02-19" =

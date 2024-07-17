@@ -1,6 +1,5 @@
 package ch.so.agi.ilivalidator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -17,7 +16,6 @@ import org.testcontainers.utility.DockerImageName;
 @Testcontainers
 @TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 public class SpringJobControllerTests extends JobControllerTests {
     
     public static GenericContainer<?> repoContainer = new GenericContainer<>(DockerImageName.parse("sogis/interlis-repository-test:latest"))

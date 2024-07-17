@@ -4,7 +4,6 @@ INTERLIS 2.3;
 
 !! 2015-11-24 Cardinalities adapted (line 122, 123, 124, 132, 133, 134, 142, 143,
 !!                                   148, 149, 163, 164, 168, 169, 206 and 207)
-!!@precursorVersion = 2005-06-16
 
 REFSYSTEM MODEL CoordSys (en) AT "http://www.interlis.ch/models"
   VERSION "2015-11-24" =

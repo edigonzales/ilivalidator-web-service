@@ -44,17 +44,21 @@ public abstract class JobControllerTests {
     
     private String API_ENDPOINT_JOBS = "/api/jobs";
     private String OPERATION_LOCATION_HEADER = "Operation-Location";
-    //private int RESULT_POLL_DELAY = 5; // seconds
     private int RESULT_POLL_INTERVAL = 5; // seconds
     private int RESULT_WAIT = 5; // minutes
 
+    //@Test
+    public void dummy_Ok() throws Exception {
+        System.out.println("Hallo Docker-Test.");
+    }
+    
     @Test
-    public void validate_File_Interlis2_Ok() throws Exception {
+    public void validate_File_Interlis2_Ok() throws Exception {        
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
         parameters.add("jobId", UUID.randomUUID().toString());
-        parameters.add("files", new FileSystemResource("src/test/data/VOLLZUG_SO0300002511_1153_20210329115028.xml"));
+        parameters.add("files", new FileSystemResource("src/test/data/ch.so.avt.kunstbauten.xtf"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "multipart/form-data");

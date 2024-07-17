@@ -91,7 +91,7 @@ Einzelner Test ausführen:
 
 Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein, wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modelle liegen im _*-server/src/test/docker/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt und sie muss im gleichen Ordner wie die Modelle zu liegen kommen (siehe Befehl unten). Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit Testcontainers hochgefahren.
 
-TODO: Geometrie, Units etc.
+In Units, Time und CoordSys musste das Metaattribut "precursorVersion" gelöscht werden, weil es im Repo keine geben wird und ili2c solche Modell anschliessend ignoriert.
 
 ```
 java -jar ilimanager-0.9.1.jar --createIliModels --repos models --out models/ilimodels.xml

@@ -1,121 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TRANSFER xmlns="http://www.interlis.ch/INTERLIS2.3">
-  <HEADERSECTION SENDER="ilimanager-0.9.1-5015e873394cc094281fe8d69f7d4e9a329c88b3" VERSION="2.3">
-    <MODELS>
-      <MODEL NAME="IliRepository20" VERSION="2020-04-17" URI="http://models.interlis.ch/core"/>
-    </MODELS>
-  </HEADERSECTION>
-  <DATASECTION>
-    <IliRepository20.RepositoryIndex BID="b1">
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="0">
-        <Name>GeometryCHLV95_V1</Name>
-        <SchemaLanguage>ili2_3</SchemaLanguage>
-        <File>CHBase_Part1_GEOMETRY_V1.ili</File>
-        <Version>2017-12-04</Version>
-        <NameLanguage>en</NameLanguage>
-        <publishingDate>2024-07-16</publishingDate>
-        <dependsOnModel>
-          <IliRepository20.ModelName_>
-            <value>CoordSys</value>
-          </IliRepository20.ModelName_>
-          <IliRepository20.ModelName_>
-            <value>Units</value>
-          </IliRepository20.ModelName_>
-        </dependsOnModel>
-        <Issuer>http://www.geo.admin.ch</Issuer>
-        <technicalContact>mailto:models@geo.admin.ch</technicalContact>
-        <furtherInformation>https://www.geo.admin.ch/de/geoinformation-schweiz/geobasisdaten/geodata-models.html</furtherInformation>
-        <browseOnly>false</browseOnly>
-        <md5>c6693f1ea70d48d7adbb815dfc23c9da</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="1">
-        <Name>Time</Name>
-        <SchemaLanguage>ili2_3</SchemaLanguage>
-        <File>Time-20200219.ili</File>
-        <Version>2020-02-19</Version>
-        <NameLanguage>en</NameLanguage>
-        <publishingDate>2020-02-19</publishingDate>
-        <dependsOnModel>
-          <IliRepository20.ModelName_>
-            <value>Units</value>
-          </IliRepository20.ModelName_>
-        </dependsOnModel>
-        <precursorVersion>2017-04-13</precursorVersion>
-        <Issuer>http://www.interlis.ch/models</Issuer>
-        <browseOnly>false</browseOnly>
-        <md5>db2a04f9162426e342dac0972461ba1b</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="2">
-        <Name>SO_AVT_Kunstbauten_Publikation_20220207</Name>
-        <SchemaLanguage>ili2_3</SchemaLanguage>
-        <File>SO_AVT_Kunstbauten_Publikation_20220207.ili</File>
-        <Version>2022-02-07</Version>
-        <NameLanguage>de</NameLanguage>
-        <publishingDate>2022-02-07</publishingDate>
-        <dependsOnModel>
-          <IliRepository20.ModelName_>
-            <value>GeometryCHLV95_V1</value>
-          </IliRepository20.ModelName_>
-        </dependsOnModel>
-        <Title>!!
-!! Publikationsmodell der Kunstbauten.</Title>
-        <shortDescription>!!------------------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?><TRANSFER xmlns="http://www.interlis.ch/INTERLIS2.3">
+<HEADERSECTION SENDER="ilimanager-0.9.1-5015e873394cc094281fe8d69f7d4e9a329c88b3" VERSION="2.3"><MODELS><MODEL NAME="IliRepository20" VERSION="2020-04-17" URI="http://models.interlis.ch/core"></MODEL></MODELS></HEADERSECTION>
+<DATASECTION>
+<IliRepository20.RepositoryIndex BID="b1">
+<IliRepository20.RepositoryIndex.ModelMetadata TID="0"><Name>Units</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>Units-20120220.ili</File><Version>2012-02-20</Version><NameLanguage>en</NameLanguage><publishingDate>2012-02-20</publishingDate><Issuer>http://www.interlis.ch/models</Issuer><browseOnly>false</browseOnly><md5>7307a06785ca51720bc9de8cec3b3db4</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="1"><Name>GeometryCHLV03_V1</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>CHBase_Part1_GEOMETRY_V1.ili</File><Version>2017-12-04</Version><NameLanguage>en</NameLanguage><publishingDate>2024-07-16</publishingDate><dependsOnModel><IliRepository20.ModelName_><value>CoordSys</value></IliRepository20.ModelName_><IliRepository20.ModelName_><value>Units</value></IliRepository20.ModelName_></dependsOnModel><Issuer>http://www.geo.admin.ch</Issuer><technicalContact>mailto:models@geo.admin.ch</technicalContact><furtherInformation>https://www.geo.admin.ch/de/geoinformation-schweiz/geobasisdaten/geodata-models.html</furtherInformation><browseOnly>false</browseOnly><md5>c6693f1ea70d48d7adbb815dfc23c9da</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="2"><Name>GeometryCHLV95_V1</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>CHBase_Part1_GEOMETRY_V1.ili</File><Version>2017-12-04</Version><NameLanguage>en</NameLanguage><publishingDate>2024-07-16</publishingDate><dependsOnModel><IliRepository20.ModelName_><value>CoordSys</value></IliRepository20.ModelName_><IliRepository20.ModelName_><value>Units</value></IliRepository20.ModelName_></dependsOnModel><Issuer>http://www.geo.admin.ch</Issuer><technicalContact>mailto:models@geo.admin.ch</technicalContact><furtherInformation>https://www.geo.admin.ch/de/geoinformation-schweiz/geobasisdaten/geodata-models.html</furtherInformation><browseOnly>false</browseOnly><md5>c6693f1ea70d48d7adbb815dfc23c9da</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="3"><Name>Time</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>Time-20200219.ili</File><Version>2020-02-19</Version><NameLanguage>en</NameLanguage><publishingDate>2020-02-19</publishingDate><dependsOnModel><IliRepository20.ModelName_><value>Units</value></IliRepository20.ModelName_></dependsOnModel><Issuer>http://www.interlis.ch/models</Issuer><browseOnly>false</browseOnly><md5>431c2c7dbecef1c16d411ef113865189</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="4"><Name>CoordSys</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>CoordSys-20151124.ili</File><Version>2015-11-24</Version><NameLanguage>en</NameLanguage><publishingDate>2015-11-24</publishingDate><Issuer>http://www.interlis.ch/models</Issuer><browseOnly>false</browseOnly><md5>0ff93c628446450a7d1ee83ae16433ce</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="5"><Name>GB2AV</Name><SchemaLanguage>ili2_2</SchemaLanguage><File>KS3-20060703.ili</File><Version>2006-07-03</Version><NameLanguage>de</NameLanguage><publishingDate>2006-07-03</publishingDate><Title>Dieses Datenmodell beschreibt die auszutauschenden Daten zwischen "Grundbuch" und "Amtliche Vermessung".</Title><shortDescription>Das Datenmodell ist in vier Themen (Gruppen bzw. Pakete) unterteilt, einerseits um den rechtsgültigen Teil vom provisorischen zu trennen, und andererseits um die Datenhoheit (Grundbuch oder Amtliche Vermessung) zu respektieren.
+@Version 2006-07-03
+@Author ceis</shortDescription><browseOnly>false</browseOnly><md5>879ba8c14d0c8089136eb96bec4bbd07</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+<IliRepository20.RepositoryIndex.ModelMetadata TID="6"><Name>SO_AVT_Kunstbauten_Publikation_20220207</Name><SchemaLanguage>ili2_3</SchemaLanguage><File>SO_AVT_Kunstbauten_Publikation_20220207.ili</File><Version>2022-02-07</Version><NameLanguage>de</NameLanguage><publishingDate>2022-02-07</publishingDate><dependsOnModel><IliRepository20.ModelName_><value>GeometryCHLV95_V1</value></IliRepository20.ModelName_></dependsOnModel><Title>!!
+!! Publikationsmodell der Kunstbauten.</Title><shortDescription>!!------------------------------------------------------------------------------
 !! Version    | wer | Aenderung
 !!------------------------------------------------------------------------------
 !! 2021-11-30 | OJ  | Initial erstellt.
-!! 2022-02-07 | sc  | Bezugspunkt von 20 auf 24 Zeichen erweitert</shortDescription>
-        <Issuer>http://geo.so.ch/models/AVT/</Issuer>
-        <technicalContact>mailto:agi@so.ch</technicalContact>
-        <browseOnly>false</browseOnly>
-        <md5>caf1af37238fbe8f895c60700090d6de</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="3">
-        <Name>GeometryCHLV03_V1</Name>
-        <SchemaLanguage>ili2_3</SchemaLanguage>
-        <File>CHBase_Part1_GEOMETRY_V1.ili</File>
-        <Version>2017-12-04</Version>
-        <NameLanguage>en</NameLanguage>
-        <publishingDate>2024-07-16</publishingDate>
-        <dependsOnModel>
-          <IliRepository20.ModelName_>
-            <value>CoordSys</value>
-          </IliRepository20.ModelName_>
-          <IliRepository20.ModelName_>
-            <value>Units</value>
-          </IliRepository20.ModelName_>
-        </dependsOnModel>
-        <Issuer>http://www.geo.admin.ch</Issuer>
-        <technicalContact>mailto:models@geo.admin.ch</technicalContact>
-        <furtherInformation>https://www.geo.admin.ch/de/geoinformation-schweiz/geobasisdaten/geodata-models.html</furtherInformation>
-        <browseOnly>false</browseOnly>
-        <md5>c6693f1ea70d48d7adbb815dfc23c9da</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="4">
-        <Name>GB2AV</Name>
-        <SchemaLanguage>ili2_2</SchemaLanguage>
-        <File>KS3-20060703.ili</File>
-        <Version>2006-07-03</Version>
-        <NameLanguage>de</NameLanguage>
-        <publishingDate>2006-07-03</publishingDate>
-        <Title>Dieses Datenmodell beschreibt die auszutauschenden Daten zwischen "Grundbuch" und "Amtliche Vermessung".</Title>
-        <shortDescription>Das Datenmodell ist in vier Themen (Gruppen bzw. Pakete) unterteilt, einerseits um den rechtsgültigen Teil vom provisorischen zu trennen, und andererseits um die Datenhoheit (Grundbuch oder Amtliche Vermessung) zu respektieren.
-@Version 2006-07-03
-@Author ceis</shortDescription>
-        <browseOnly>false</browseOnly>
-        <md5>879ba8c14d0c8089136eb96bec4bbd07</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-      <IliRepository20.RepositoryIndex.ModelMetadata TID="5">
-        <Name>Units</Name>
-        <SchemaLanguage>ili2_3</SchemaLanguage>
-        <File>Units-20120220.ili</File>
-        <Version>2012-02-20</Version>
-        <NameLanguage>en</NameLanguage>
-        <publishingDate>2012-02-20</publishingDate>
-        <precursorVersion>2005-06-06</precursorVersion>
-        <Issuer>http://www.interlis.ch/models</Issuer>
-        <browseOnly>false</browseOnly>
-        <md5>e2a198a0599581673d55bbc2c968a9f8</md5>
-      </IliRepository20.RepositoryIndex.ModelMetadata>
-    </IliRepository20.RepositoryIndex>
-  </DATASECTION>
+!! 2022-02-07 | sc  | Bezugspunkt von 20 auf 24 Zeichen erweitert</shortDescription><Issuer>http://geo.so.ch/models/AVT/</Issuer><technicalContact>mailto:agi@so.ch</technicalContact><browseOnly>false</browseOnly><md5>caf1af37238fbe8f895c60700090d6de</md5></IliRepository20.RepositoryIndex.ModelMetadata>
+</IliRepository20.RepositoryIndex>
+</DATASECTION>
 </TRANSFER>
