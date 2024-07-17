@@ -84,10 +84,10 @@ jobs:
           push: ${{ (github.ref == 'refs/heads/main') && (github.event_name != 'pull_request') && !env.ACT }}
           tags: |
             ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:latest
-            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.VERSION }}
-            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR }}.${{ env.MINOR }}
-            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR }}
+            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}.${{ env.VERSION }}
+            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}
+            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}
             ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:latest
-            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}::${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.VERSION }}
-            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR }}.${{ env.MINOR }}
-            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR }}
+            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}::${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}.${{ env.VERSION }}
+            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}.${{ env.MINOR_NUMBER }}
+            ghcr.io/${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:${{ env.MAJOR_NUMBER }}
