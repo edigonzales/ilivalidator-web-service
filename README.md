@@ -42,21 +42,69 @@ respektive mit Docker:
 docker run -p 8080:8080 sogis/ilivalidator-web-service
 ```
 
-Die Konfiguration erfolgt entweder mit Spring Properties oder mit Env Vars.
+Konfiguration via _application.properties_ im Verzeichnis in dem der Service gestartet wird. Oder entsprechende alternative Konfigurationsmöglichkeiten von [Spring Boot](https://docs.spring.io/spring-boot/reference/features/external-config.html).
+
+Die Anwendung beinhaltet bereits eine _application.properties_-Datei. Siehe [application.properties](src/main/resources/application.properties), welche beim obigen Aufruf standardmässig verwendet wird.
+
+Der Dockercontainer verwendet eine leicht angepasste Konfiguration ([application-docker.properties](src/main/resources/application-docker.properties)), damit das Mounten von Verzeichnissen hoffentlich einfacher fällt und weniger Fehler passieren:
+
+- Die SQLite-Datenbank wird im _/work_-Verzeichnis angelegt, das im Dockerimage angelegt wird.
+- Für `WORK_DIRECTORY` wird das _/work_-Verzeichnis verwendet, das im Dockerimage angelegt wird. 
+
+Die allermeisten Optionen sind via Umgebungsvariablen exponiert und somit veränderbar. Im Extremfall kann immer noch ein neues Dockerimage erstellt werden mit einer ganz eigenen Konfiguration.
 
 ### Optionen (Umgebungsvariablen)
 
 Mit Docker wird die Anwendung mit einem docker-Profil gestartet (siehe Dockerfile). Standardwerte gemäss diesem application-docker.properties:
 
+| Name | Beschreibung | Standard |
+|-----|-----|-----|
+| `MAX_FILE_SIZE` | Die maximale Grösse einer Datei, die hochgeladen werden kann in Megabyte. | `200` |
+| `LOG_LEVEL` | Das Logging-Level des Spring Boot Frameworks. | `INFO` |
+| `LOG_LEVEL_DB_CONNECTION_POOL` | Das Logging-Level des DB-Connection-Poolsocket. | `INFO` |
+| `LOG_LEVEL_APPLICATION` | Das Logging-Level der Anwendung (= selber geschriebener Code). | `DEBUG` |
+| `CONNECT_TIMEOUT` | Die Zeit in Millisekunden, die bis zu einem erfolgreichem Connect gewartet wird. Betrifft sämtliche Methoden, welche `sun.net.client.defaultConnectTimeout` berücksichtigen. Die Option dient dazu damit langsame INTERLIS-Modellablage schneller zu einem Timeout führen. | `5000` |
+| `READ_TIMEOUT` | Die Zeit in Millisekunden, die bis zu einem erfolgreichem Lesen gewartet wird. Betrifft sämtliche Methoden, welche `sun.net.client.defaultConnectTimeout` berücksichtigen. Die Option dient dazu damit langsame INTERLIS-Modellablage schneller zu einem Timeout führen. | `5000` |
+| `WORK_DIRECTORY` | Verzeichnis, in das die zu prüfenden INTERLIS-Transferdatei und die Logdateien kopiert werden (in ein temporäres Unterverzeichnis, das im `WORK_DIRECTORY` erstellt wird). Falls `local` Storage Service gewählt ist, muss das Verzeichnis, bei einem Betrieb mit mehreren Containern, zwingend geteilt werden muss. Sonst ist nicht sichergestellt, dass man die Logdatei(en) herunterladen kann. Falls `s3` Storage Service gewählt ist, muss der Name des Buckets gewählt werden, in den die Daten kopiert werden. | `/work/` |
+| `FOLDER_PREFIX` | Für jede zu prüfende Datei wird im `WORK_DIRECTORY`-Verzeichnis ein temporäres Verzeichnis erstellt. Der Prefix wird dem Namen des temporären Verzeichnisses vorangestellt. | `ilivalidatorws_` |
+| `CLEANER_ENABLED` | Dient zum Ein- und Ausschalten des Aufräumprozesses, der alte, geprüfte Dateien (INTERLIS-Transferdateien, Logfiles) löscht. | `true` |
+| `REST_API_ENABLED` | Dient zum Ein- und Ausschalten des REST-API-Controllers und damit der eigentlichen Funktionalität (auch wenn Jobrunr trotzdem initialisiert wird). | `true` |
+| `JDBC_URL` | Die JDBC-Url der Sqlite-Datei, die dem Speichern der Jobs dient, welche mittels REST-API getriggert wurden. Die Datei wird im Standard-`WORK`-Verzeichnis gespeichert, da dieses beim Multi-Container-Betrieb geteilt werden muss. Andere JDBC-fähige Datenbanken sind ebenfalls möglich. Dann müssten noch mindestens Login und Password als Option exponiert werden. Und die Anwendung müsste neu mit dem dazugehörigen JDBC-Treiber gebuildet werden. | `jdbc:sqlite:/work/jobrunr_db.sqlite` |
+| `JOBRUNR_SERVER_ENABLED` | Dient die Instanz als sogenannter Background-Jobserver, d.h. werden mittels REST-API hochgeladene INTERLIS-Transferdateien validiert. Wird nur eine Instanz betrieben, muss die Option zwingen `true` sein, da sonst der Job nicht ausgeführt wird. | `true` |
+| `JOBRUNR_POLL_INTERVAL` | Es wird im Intervall (in Sekunden) nach neuen Validierungsjobs geprüft. | `10` |
+| `JOBRUNR_WORKER_COUNT` | Anzahl Jobs, die in einem "Worker" gleichzeitig durchgeführt werden können. Im Prinzip nicht sehr relevant, da der Validierungsjob synchronisiert ist (nicht thread safe). | `1` |
+| `JOBRUNR_DASHBOARD_ENABLED` | Das Jobrunr-Dashboard wird auf dem Port 8000 gestartet. | `true` |
+| `JOBRUNR_DASHBOARD_USER` | Username für Jobrunr-Dasboard. Achtung: Basic Authentication. | `admin` |
+| `JOBRUNR_DASHBOARD_PWD` | Passwort für Jobrunr-Dasboard. Achtung: Basic Authentication. | `admin` |
+| `TOMCAT_THREADS_MAX` | Maximale Anzahl Threads, welche die Anwendung gleichzeitig bearbeitet. | `20` |
+| `TOMCAT_ACCEPT_COUNT` | Maximale Grösser der Queue, falls keine Threads mehr verfügbar. | `100` |
+| `TOMCAT_MAX_CONNECTIONS` | Maximale Anzahl Threads des Servers. | `500` |
+| `HIKARI_MAX_POOL_SIZE` | Grösse des DB-Connections-Pools | `10` |
+| `PREFERRED_ILI_REPO` | Modell- und Datenrepository, das als erstes externes durchsucht wird | `https://geo.so.ch/models` |
 
+Ein `docker-run`-Befehl könnte circa so aussehen:
+
+```
+docker run --rm -p8080:8080 -p8000:8000 -v /shared_storage/work:/work/ sogis/ilivalidator-web-service:3
+```
+
+Es werden zwei Ports gemapped. Der Port 8080 ist der Port der Anwendung und zwingend notwendig. Der Port 8000 dient dazu, dass das Jobrunr-Dashboard verfügbar ist.
+
+Im lokalen Filesystem (oder Kubernetes-PV-Whatever etc.) muss das Verzeichnis _/shared_storage/work/_ vorhanden sein. Die SQLite-Datenbank, die dazu dient die (REST-API-)Jobs zu koordinieren, befindet sich im _/shared_storage/work/_-Verzeichnis. 
 
 ### Clean up
 
-### Additional models
+Ein Scheduler löscht jede halbe Stunde (momentan hardcodiert) alle temporären Verzeichnisse, die älter als 60x60 Sekunden sind.
 
 ### Ilivalidator custom functions
 
+Custom-Funktionen können in zwei Varianten verwendet werden. Die Jar-Datei mit den Funktionen muss in einem Verzeichnis liegen und vor jeder Prüfung werden die Klassen dynamisch geladen. Das hat den Nachteil, dass man so kein Native-Image (GraalVM) mit Custom-Funktionen herstellen kann und man z.B. bei einem Webservice die Klassen nicht einfach als Dependency definierten kann, sondern die Jar-Datei muss in einem Verzeichnis liegen, welches beim Aufruf von _ilivalidator_ als Option übergeben wird. Bei der zweiten (neueren) Variante kann man die Custom-Funktionen als normale Dependency im Java-Projekt definieren. Zusätzlich müssen die einzelnen Klassen als Systemproperty der Anwendung bekannt gemacht werden. 
+
+Im vorliegenden Fall wird die zweite Variante gewählt. Das notwendige Systemproperty wird in der `Application`-Klasse gesetzt. Falls man die erste Variante vorzieht oder aus anderen Gründen verwenden will, macht man z.B. ein Verzeichnis `src/main/resources/libs-ext/` und kopiert beim Builden die Jar-Datei in dieses Verzeichnis. Dazu wird eine Gradle-Konfiguration benötigt. Zur Laufzeit (also wenn geprüft wird) muss man die Jar-Datei auf das Filesystem kopieren und dieses Verzeichnis als Options _ilivalidator_ übergeben.
+
 ### Clustering
+
+Sämtliche "Koordinationsaufgaben" wie z.B. das Entpacken der Config-Dateien, das Löschen von alten Files etc. sollte (und in einigen Fällen: darf) nur von einer Instanz ausgeführt werden. Als Beispiel eine einfache `docker-compose` Konfiguration:
 
 ## Externe Abhängigkeiten
 
