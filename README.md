@@ -106,7 +106,49 @@ Im vorliegenden Fall wird die zweite Variante gewählt. Das notwendige Systempro
 
 Sämtliche "Koordinationsaufgaben" wie z.B. das Entpacken der Config-Dateien, das Löschen von alten Files etc. sollte (und in einigen Fällen: darf) nur von einer Instanz ausgeführt werden. Als Beispiel eine einfache `docker-compose` Konfiguration:
 
+```
+version: '3'
+services:
+  frontend:
+    image: sogis/ilivalidator-web-service:3
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Zurich
+      JOBRUNR_SERVER_ENABLED: "false"
+    ports:
+      - 8080:8080
+      - 8000:8000
+    volumes:
+      - type: volume
+        source: work
+        target: /work
+  worker:
+    image: sogis/ilivalidator-web-service:3
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+    environment:
+      TZ: Europe/Zurich
+      JOBRUNR_DASHBOARD_ENABLED: "false"
+      REST_API_ENABLED: "false"
+      UNPACK_CONFIG_FILES: "false"
+      CLEANER_ENABLED: "false"
+    volumes:
+      - type: volume
+        source: work
+        target: /work
+volumes:
+  docbase:
+  work:
+```
+
+Es wird ein "frontend"-Service gestartet, welche als Schnittstelle gegen aussen dient. Es werden mehrere "worker"-Services gestartet (`replicas`), die nur für das Validieren einer INTERLIS-Transferdatei zuständig sind. Es sind keine Port exponiert, da keiner dieser Worker-Service von aussen verfügbar sein muss. Es werden verschiedene Applikationsfunktionen ausgeschaltet (sieh Umgebungsvariablen). Das Jobmanagement wird mit [Jobrunr](https://jobrunr.io) gemacht.
+
+Achtung: Mit Docker Compose Version 3 kann im Nicht-Swarm-Mode keine CPU-Limits gesetzt werden.
+
 ## Externe Abhängigkeiten
+
+Die Zusatzkonfigurationen - ini-Dateien für die Optionen --config und --metaConfig - müssen auf ilidata-Repositories liegen. Dies ist ein bewusster Entscheid (single source of truth). 
 
 ## Interne Struktur
 
@@ -120,7 +162,7 @@ TODO:
 - Wie wird metaConfig etc. getestet? (Weiss ich noch nicht zu 100%: Idee neu wäre wohl mit kleinem lokalen Dockerimage mit ilidata.xml etc. Dann müsste preferred Ili Repo im Test noch anders gestetzt werden.)
 - Registrierung Zusatzfunktionen
 - --spring.profiles.active=docker
-- ./mvnw versions:set -DnewVersion=3.0.1-SNAPSHOT -DprocessAllModules
+- ./mvnw versions:set -DnewVersion=3.0.1-SNAPSHOT -DprocessAllModules (noch nicht implementiert)
 - git-commit-id-plugin -> inkl. Link: http://localhost:8080/actuator/info
 
 ## Entwicklung
@@ -148,7 +190,7 @@ Or without downloading all the snapshots again:
 ./mvnw -Penv-prod clean package -DexcludedGroups="docker"
 ```
 
-In der Package-Phase werden die "Spring pur"-Tests durchgeführt und es wird am Ende ein Dockerimage für die Dockertests erstellt. Die definitiven Dockerimages werden wegen des Multi-Arch-Builds in der Pipeline erstellt und publiziert. Die Tests können auch separat ausgeführt werden:
+In der Package-Phase werden die "Spring pur"-Tests durchgeführt und es wird am Ende ein Dockerimage für die Dockertests erstellt. Die definitiven Dockerimages werden wegen des Multi-Arch-Builds in der Pipeline erstellt und publiziert. Die Tests können auch separat ausgeführt werden.
 
 Maven kennt Integrationtests in der Verify-Phase (nach Package). Wir verwenden jedoch nochmals eine separate Testphase, um die Dockertests durchzuführen (siehe nachfolgendes Kapitel).
 
@@ -159,7 +201,7 @@ Maven kennt Integrationtests in der Verify-Phase (nach Package). Wir verwenden j
 ```
 
 ```
-./mvnw -Penv-test clean test -DexcludedGroups="docker"
+./mvnw -Penv-test clean test -Dgroups="docker"
 ```
 
 Einzelner Test ausführen:
@@ -168,8 +210,7 @@ Einzelner Test ausführen:
 ./mvnw -Penv-test test -Dtest=SpringJobControllerTests#validate_File_Interlis2_Ok -Dsurefire.failIfNoSpecifiedTests=false
 ```
 
-
-### Lokales Repository
+### Lokales Modell- und Daten-Repository
 
 Für die Durchführung der Tests wird ein INTERLIS-Modellrepository benötigt. Um zur Laufzeit der Tests nicht von fremden (dazu gehört auch unser eigenes) Repositories abhängig zu sein und Veränderungen in solchen (z.B. replaced Modelle, Änderungen in den ini-Konfigs), wird ein Dockerimage mit den für die Tests benötigten Modellen hergestellt. Die Modelle liegen im _*-server/src/test/docker/models_-Ordner. Die ilimodels.xml-Datei wird mit ilimanager hergestellt und sie muss im gleichen Ordner wie die Modelle zu liegen kommen (siehe Befehl unten). Das Dockerimage wird im Maven-Build erzeugt und in den Tests mit Testcontainers hochgefahren.
 
