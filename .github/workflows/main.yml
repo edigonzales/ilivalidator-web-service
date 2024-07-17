@@ -76,6 +76,10 @@ jobs:
       - name: Multi-platform build and push to Docker Container Registry and Github Container Registry
         uses: docker/build-push-action@v2
         with:
+          cache-from: |
+            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:cache
+          cache-to: |
+            ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:cache
           platforms: linux/amd64,linux/arm64
           context: ilivalidator-web-service-server
           file: ilivalidator-web-service-server/Dockerfile.ubi-layered
