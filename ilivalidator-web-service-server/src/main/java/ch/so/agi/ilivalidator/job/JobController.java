@@ -75,8 +75,7 @@ public class JobController {
             @RequestPart(name="files", required=true) MultipartFile[] files, 
             @RequestPart(name="profile", required=false) String profile) {
         
-        String qualifiedProfile = profiles.get(profile);
-        String profileString = qualifiedProfile==null?"":qualifiedProfile;
+        String profileString = profile==null?"":profile;
         
         log.debug("<{}> Selected profile: {}", jobId, profile);
         log.debug("<{}> Number of uploaded files: {}", jobId, files.length);
@@ -88,7 +87,7 @@ public class JobController {
         } catch (IOException e) {
             throw new RuntimeException("Could not store files.");
         }
-        
+
         jobScheduler.enqueue(UUID.fromString(jobId), () -> jobService.validate(JobContext.Null, uploadedFiles, profileString));
         
         return ResponseEntity

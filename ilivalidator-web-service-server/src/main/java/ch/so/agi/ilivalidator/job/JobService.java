@@ -49,7 +49,7 @@ public class JobService {
         }        
 
         if (!profile.isEmpty()) {
-            settings.setValue(Validator.SETTING_META_CONFIGFILE, "ilidata:" + profile);
+            settings.setValue(Validator.SETTING_META_CONFIGFILE, profile);
         }
         
         log.info("Validation start");

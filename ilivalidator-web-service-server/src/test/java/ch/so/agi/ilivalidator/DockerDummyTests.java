@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 @Tag("docker")
 public class DockerDummyTests {
 
-    @Test
+    //@Test
     public void dummy_Ok() throws Exception {
         System.out.println("Hallo Docker-Test.");
     }

@@ -12,5 +12,4 @@ RUN mkdir -p /opt/repository/
 
 COPY models /opt/repository
 
-
 USER 11200

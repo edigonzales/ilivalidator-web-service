@@ -97,6 +97,8 @@ In Units, Time und CoordSys musste das Metaattribut "precursorVersion" gelöscht
 java -jar ilimanager-0.9.1.jar --createIliModels --repos models --out models/ilimodels.xml
 ```
 
+Zusätzlich ist auch ein ilidata.xml notwendig für die ilivalidator-Konfigurationen (ini-Files). Die Datei wurde manuell angelegt und nachgeführt.
+
 Docker image builden:
 
 ```
