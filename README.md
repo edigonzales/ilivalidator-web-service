@@ -53,7 +53,7 @@ TODO:
 - Wie wird metaConfig etc. getestet? (Weiss ich noch nicht zu 100%: Idee neu wäre wohl mit kleinem lokalen Dockerimage mit ilidata.xml etc. Dann müsste preferred Ili Repo im Test noch anders gestetzt werden.)
 - Registrierung Zusatzfunktionen
 - --spring.profiles.active=docker
-
+- ./mvnw versions:set -DnewVersion=3.0.1-SNAPSHOT -DprocessAllModules
 
 ## Entwicklung
 
