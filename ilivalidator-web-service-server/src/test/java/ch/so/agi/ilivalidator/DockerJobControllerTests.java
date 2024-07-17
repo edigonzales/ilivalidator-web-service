@@ -47,7 +47,7 @@ public class DockerJobControllerTests extends JobControllerTests {
         
         appContainer.start();
         
-        // Damit die Tests den Port des ilivalidator-web-services kennen und mit ihm
+        // Damit die Tests den zufälligen Port des ilivalidator-web-services kennen und mit ihm
         // kommunizieren können.
         port = String.valueOf(appContainer.getMappedPort(exposedPort)); 
     }
