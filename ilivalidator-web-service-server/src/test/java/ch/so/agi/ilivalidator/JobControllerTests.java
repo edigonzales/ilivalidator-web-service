@@ -250,6 +250,7 @@ public abstract class JobControllerTests {
         String serverUrl = "http://localhost:"+port+API_ENDPOINT_JOBS;
 
         MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
+        parameters.add("files", new FileSystemResource("src/test/data/ch.so.avt.kunstbauten.xtf"));        
         parameters.add("profile", "ilidata:SO_Nutzungsplanung_20171118_20231101-meta");
         
         HttpHeaders headers = new HttpHeaders();
