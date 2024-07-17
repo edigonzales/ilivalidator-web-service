@@ -18,7 +18,7 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SpringJobControllerTests extends JobControllerTests {
     
-    public static GenericContainer<?> repoContainer = new GenericContainer<>(DockerImageName.parse("sogis/interlis-repository-test:latest"))
+    public static GenericContainer<?> repoContainer = new GenericContainer<>(DockerImageName.parse("sogis/interlis-repository-test:local"))
         .waitingFor(Wait.forHttp("/ilimodels.xml"))
         .withExposedPorts(8080)
         .withLogConsumer(new Slf4jLogConsumer(logger));

@@ -87,17 +87,17 @@ Maven kennt Integrationtests in der Verify-Phase (nach Package). Wir verwenden j
 ### Tests
 
 ```
-./mvnw test -DexcludedGroups="docker"
+./mvnw -Penv-test clean test -DexcludedGroups="docker"
 ```
 
 ```
-./mvnw test -Dgroups="docker"
+./mvnw -Penv-test clean test -DexcludedGroups="docker"
 ```
 
 Einzelner Test ausführen:
 
 ```
-./mvnw test -Dtest=SpringJobControllerTests#validate_File_Interlis2_Ok -Dsurefire.failIfNoSpecifiedTests=false
+./mvnw -Penv-test test -Dtest=SpringJobControllerTests#validate_File_Interlis2_Ok -Dsurefire.failIfNoSpecifiedTests=false
 ```
 
 

@@ -322,7 +322,7 @@
                             <arguments>
                                 <argument>build</argument>
                                 <argument>-t</argument>
-                                <argument>sogis/interlis-repository-test</argument>
+                                <argument>sogis/interlis-repository-test:local</argument>
                                 <argument>-f</argument>
                                 <argument>./src/test/docker/Dockerfile</argument>
                                 <argument>./src/test/docker</argument>

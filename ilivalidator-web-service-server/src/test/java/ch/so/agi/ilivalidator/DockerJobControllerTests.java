@@ -24,7 +24,7 @@ public class DockerJobControllerTests extends JobControllerTests {
 
     static Network network = Network.newNetwork();
 
-    public static GenericContainer<?> repoContainer = new GenericContainer<>(DockerImageName.parse("sogis/interlis-repository-test:latest"))
+    public static GenericContainer<?> repoContainer = new GenericContainer<>(DockerImageName.parse("sogis/interlis-repository-test:local"))
             .waitingFor(Wait.forHttp("/ilimodels.xml"))
             .withExposedPorts(8080) // Braucht es nicht für die Kommunikation zwischen den Container. Für den "Wait"-Check muss ein Port jedoch exposed sein.
             .withNetwork(network)
