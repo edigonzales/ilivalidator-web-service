@@ -17,7 +17,19 @@ Die Anwendung kann wie folgt gestartet werden:
 java -jar ilivalidator-web-service-server/target/ilivalidator-web-service.jar 
 ```
 
+respektive mit Docker:
+
+```
+docker run -p 8080:8080 sogis/ilivalidator-web-service
+```
+
+Die Konfiguration erfolgt entweder mit Spring Properties oder mit Env Vars.
+
 ### Optionen (Umgebungsvariablen)
+
+Mit Docker wird die Anwendung mit einem docker-Profil gestartet (siehe Dockerfile). Standardwerte gemäss diesem application-docker.properties:
+
+
 
 ### Clean up
 
@@ -40,6 +52,7 @@ TODO:
 - Test und Dockertests
 - Wie wird metaConfig etc. getestet? (Weiss ich noch nicht zu 100%: Idee neu wäre wohl mit kleinem lokalen Dockerimage mit ilidata.xml etc. Dann müsste preferred Ili Repo im Test noch anders gestetzt werden.)
 - Registrierung Zusatzfunktionen
+- --spring.profiles.active=docker
 
 
 ## Entwicklung
