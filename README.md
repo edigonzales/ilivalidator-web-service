@@ -80,7 +80,7 @@ Mit Docker wird die Anwendung mit einem docker-Profil gestartet (siehe Dockerfil
 | `TOMCAT_ACCEPT_COUNT` | Maximale Grösser der Queue, falls keine Threads mehr verfügbar. | `100` |
 | `TOMCAT_MAX_CONNECTIONS` | Maximale Anzahl Threads des Servers. | `500` |
 | `HIKARI_MAX_POOL_SIZE` | Grösse des DB-Connections-Pools | `10` |
-| `PREFERRED_ILI_REPO` | Modell- und Datenrepository, das als erstes externes durchsucht wird | `https://geo.so.ch/models` |
+| `ILIDIRS` | Modell- und Datenrepositorie, die verwendet werden sollen. | `https://geo.so.ch/models;https://models.interlis.ch;https://models.geo.admin.ch` |
 
 Ein `docker-run`-Befehl könnte circa so aussehen:
 
