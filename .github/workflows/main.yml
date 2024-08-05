@@ -98,7 +98,7 @@ jobs:
             ${{ env.DOCKER_ACCOUNT }}/${{ env.DOCKER_REPO }}:cache
           platforms: linux/amd64,linux/arm64
           context: ilivalidator-web-service-server
-          file: ilivalidator-web-service-server/Dockerfile.ubi-layered
+          file: ilivalidator-web-service-server/Dockerfile.jvm
           labels: ${{ steps.meta.outputs.labels }}
           pull: true
           push: ${{ (github.ref == 'refs/heads/main') && (github.event_name != 'pull_request') && !env.ACT }}
