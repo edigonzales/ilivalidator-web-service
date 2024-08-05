@@ -228,16 +228,6 @@
             </activation>
             <build>
                 <plugins>
-                    <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <groups>docker</groups>
-                    <excludedGroups>docker</excludedGroups>
-                </configuration>
-            </plugin>
-                -->
                     <!-- Das ist "maven build smell", weil das Entpacken vor dem
                     Packen kommt. Eclipse und Maven reklamiert ggf. auch. -->
                     <plugin>
