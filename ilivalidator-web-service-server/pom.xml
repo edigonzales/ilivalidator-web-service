@@ -278,7 +278,7 @@
                                         <argument>-t</argument>
                                         <argument>sogis/ilivalidator-web-service</argument>
                                         <argument>-f</argument>
-                                        <argument>Dockerfile.ubi-layered</argument>
+                                        <argument>Dockerfile.jvm</argument>
                                         <argument>.</argument>
                                     </arguments>
                                 </configuration>

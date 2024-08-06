@@ -12,5 +12,4 @@ public class SpringProfileControllerTests extends ProfileControllerTests {
     public SpringProfileControllerTests(@Autowired TestRestTemplate restTemplate, @Autowired ObjectMapper mapper) {
         super(restTemplate, mapper);
     }
-
 }

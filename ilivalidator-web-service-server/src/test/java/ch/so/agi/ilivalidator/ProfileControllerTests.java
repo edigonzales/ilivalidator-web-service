@@ -18,7 +18,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public abstract class ProfileControllerTests {
-    Logger logger = LoggerFactory.getLogger(ProfileControllerTests.class);
+    protected static Logger logger = LoggerFactory.getLogger(ProfileControllerTests.class);
 
     @LocalServerPort
     protected String port;
